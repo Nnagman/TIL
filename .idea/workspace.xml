@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3559109a-9aa2-460c-becc-866bb2340c5b" name="변경" comment="한 권으로 읽는 컴퓨터 구조와 프로그래밍&#10;&#10;p. 85까지" />
+    <list default="true" id="3559109a-9aa2-460c-becc-866bb2340c5b" name="변경" comment="한 권으로 읽는 컴퓨터 구조와 프로그래밍&#10;&#10;p. 85까지">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithm/Books/src/thisIsCodingTest/part3/sort/korEngMath/KorEngMath.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithm/Books/src/thisIsCodingTest/part3/sort/korEngMath/korEngMath.md" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +71,8 @@
       <recent name="C:\Users\nnagm\OneDrive\바탕 화면\project\TIL\algorithm\Books\src\thisIsCodingTest\part3" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\code\TIL\algorithm\Books\src\thisIsCodingTest\part3\sort" />
+      <recent name="F:\code\TIL\algorithm\Books\src\thisIsCodingTest\part3" />
       <recent name="C:\Users\nnagm\OneDrive\바탕 화면\project\TIL\algorithm\Books\src\thisIsCodingTest\part3\binarySearch\countingNumber" />
     </key>
   </component>
@@ -83,11 +90,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="애플리케이션.SearchLyrics" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -110,6 +112,7 @@
       <workItem from="1643203463486" duration="53000" />
       <workItem from="1643203580500" duration="29000" />
       <workItem from="1643203717513" duration="25000" />
+      <workItem from="1643204413503" duration="256000" />
     </task>
     <task id="LOCAL-00001" summary="이것이 코딩 테스트다&#10;&#10;369p까지 ( 이진탐색문제 )">
       <created>1643082310018</created>
