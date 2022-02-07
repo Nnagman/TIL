@@ -14,8 +14,9 @@
    <br><br>
 2. BFS는 큐 자료구조를 이용한다. 시작 노드를 큐에 담고 인접한 노드들을 오름차순으로 큐에 담는다. 그리고 큐에 담긴 노드를 꺼내고 해당 노드와 인접한 노드들을 다시 큐에 담는다. 이 과정을 큐에 노드가 하나도 없을 때 까지 반복한다.
 
-## [음료수 얼려 먹기 p.96](https://github.com/Nnagman/TIL/blob/main/algorithm/Books/src/thisIsCodingTest/part2/dfsBfs/freezeDrinks.java)
+## [음료수 얼려 먹기 p.149](https://github.com/Nnagman/TIL/blob/main/algorithm/Books/src/thisIsCodingTest/part2/dfsBfs/freezeDrinks.java)
 1. NxM 크기의 얼음 틀에 몇개의 음료수 아이스크림이 생성되는지 확인하는 문제다. 0은 빈곳 1은 칸막이로 0에 음료를 담을 수 있고 칸막이로 아이스크림의 갯수가 결정된다.
    <br><br>
 2. DFS를 사용해서 해결하는 문제다. 좌표00부터 NM까지 반복문을 돌리며 빈곳을 찾아 채워나간다. 이때, 빈곳을 채우면 DFS를 사용하여 인접한 모든 빈곳을 채운다. 그리고 한번이라도 DFS를 수행했다면 아이스크림 갯수를 하나 증감시킨다. 이 과정을 NM까지 반복하면 정답이 나온다.
 
+## [미로 탈출 p.152](https://github.com/Nnagman/TIL/blob/main/algorithm/Books/src/thisIsCodingTest/part2/dfsBfs/escapeMaze.java)
