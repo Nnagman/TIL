@@ -2,7 +2,7 @@ package thisIsCodingTest.part2.dfsBfs;
 
 import java.util.Scanner;
 
-public class freezeDrinks {
+public class FreezeDrinks {
     public static int n, m;
     public static int[][] graph = new int[1000][1000];
 

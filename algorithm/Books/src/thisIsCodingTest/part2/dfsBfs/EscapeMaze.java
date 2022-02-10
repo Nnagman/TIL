@@ -22,7 +22,7 @@ class Node {
     }
 }
 
-public class escapeMaze {
+public class EscapeMaze {
     public static int n, m;
     public static final int[][] arr = new int[201][201];
     public static final int[] dx = {-1, 1, 0, 0};
@@ -66,9 +66,6 @@ public class escapeMaze {
                 arr[i][j] = str.charAt(j) - '0';
             }
         }
-
-        int nx, ny;
-        Queue<Node> queue = new LinkedList<>();
 
         System.out.println(bfs(0, 0));
     }
