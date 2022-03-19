@@ -23,9 +23,11 @@
    <br><br>
 2. 구체적인 알고리즘은 다음과 같다. 간선 데이터를 오름차순으로 정렬한다 -> 정렬된 간선을 하나씩 확인하며 사이클이 발생하지 않는다면 최소 신장 트리에 포함시킨다. -> 모든 간선을 확인 할 때까지 반복한다.
 
-### 위상 정렬 p.290
+### [위상 정렬 p.290](https://github.com/Nnagman/TIL/blob/main/algorithm/Books/src/thisIsCodingTest/part2/graph/TopologySort.java)
 1. 위상 정렬(Topology Sort)은 순서가 정해져 있는 일련의 작업을 차례대로 수행해야 할 때 사용할 수 있는 알고리즘이다. 이론적으로는 방향 그래프의 모든 노드를 '순서를 거스르지 않도록 순서대로 나열하는 것'이다.
    <br><br>
 2. 위상 정렬에선 진입차수(Indegree)란 용어를 사용하는데, 특정한 노드로 '들어오는' 간선의 개수를 의미한다.
    <br><br>
 3. 알고리즘은 다음과 같다. 진입차수가 0인 노드를 큐에 넣는다 -> 큐에서 원소를 꺼내 해당 노드에서 출발하는 간선을 그래프에서 제거한다 -> 새롭게 진입차수가 0이 된 노드를 큐에 넣는다 -> 큐가 빌 때까지 반복한다.
+
+### [팀 결정 p.298](https://github.com/Nnagman/TIL/blob/main/algorithm/Books/src/thisIsCodingTest/part2/graph/TeamDecision.java)
