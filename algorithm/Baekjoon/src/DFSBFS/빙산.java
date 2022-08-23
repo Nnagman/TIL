@@ -19,7 +19,7 @@ public class 빙산 {
         }
     }
 
-    static int N, M, C, H, tc, nx, ny;
+    static int N, M, C, H, ans, nx, ny;
     static int[][] arr;
     static boolean[][] visited;
     static int[] dx = {0, 1, 0, -1};
@@ -42,42 +42,67 @@ public class 빙산 {
             }
         }
 
-        for (int i = 1; i < H; i++) {
-            C = 0;
-            visited = new boolean[N][M];
-            for (int j = 1; j < N - 1; j++) {
-                for (int k = 1; k < M - 1; k++) {
-                    if (arr[j][k] < 1 || visited[j][k]) {
-                        continue;
-                    }
-                    visited[j][k] = true;
-                    dfs(j, k);
-                    C += 1;
-                    if (C > 1) {
-                        System.out.println(i);
-                        return;
-                    }
+        while ((C = check()) < 2) {
+            if (C == 0) {
+                ans = 0;
+                break;
+            }
+
+            bfs();
+            ans += 1;
+        }
+        System.out.println(ans);
+    }
+
+    public static int check() {
+        visited = new boolean[N][M];
+        int cnt = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                if (arr[i][j] != 0 && !visited[i][j]) {
+                    dfs(i, j);
+                    cnt++;
                 }
             }
         }
-        System.out.println(0);
+        return cnt;
     }
 
     private static void dfs(int x, int y) {
+        visited[x][y] = true;
         for (int i = 0; i < 4; i++) {
             nx = x + dx[i];
             ny = y + dy[i];
-            if (nx < 1 || ny < 1 || nx > N - 2 || ny > M - 2 || arr[nx][ny] < 1
-                || visited[nx][ny]) {
+            if (nx < 1 || ny < 1 || nx > N - 2 || ny > M - 2) {
                 continue;
             }
-            visited[nx][ny] = true;
-            dfs(nx, ny);
+            if (arr[nx][ny] != 0 && !visited[nx][ny]) {
+                dfs(nx, ny);
+            }
         }
     }
 
     private static void bfs() {
+        visited = new boolean[N][M];
         Queue<Node> q = new LinkedList<>();
-        for(int i )
+        for (int i = 1; i < N - 1; i++) {
+            for (int j = 1; j < M - 1; j++) {
+                if (arr[i][j] != 0) {
+                    q.add(new Node(i, j));
+                    visited[i][j] = true;
+                }
+            }
+        }
+
+        while (!q.isEmpty()) {
+            Node node = q.poll();
+            for (int i = 0; i < 4; i++) {
+                nx = node.x + dx[i];
+                ny = node.y + dy[i];
+                if (!visited[nx][ny] && arr[nx][ny] == 0) {
+                    arr[node.x][node.y] = Math.max(arr[node.x][node.y] - 1, 0);
+                }
+            }
+        }
     }
 }
