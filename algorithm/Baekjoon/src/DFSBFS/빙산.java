@@ -78,6 +78,5 @@ public class 빙산 {
 
     private static void bfs() {
         Queue<Node> q = new LinkedList<>();
-        for(int i )
     }
 }
