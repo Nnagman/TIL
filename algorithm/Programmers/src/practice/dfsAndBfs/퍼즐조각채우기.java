@@ -30,159 +30,136 @@ public class 퍼즐조각채우기 {
         }
     }
 
-    static class Shape {
+    static int[] dx = {-1, 0, 1, 0};
+    static int[] dy = {0, 1, 0, -1};
 
-        boolean used;
-        int count;
-        int[][] shape;
+    static private int solution(int[][] game_board, int[][] table) {
+        int answer = -1;
 
-        public Shape(boolean used, int count, int[][] shape) {
-            this.used = used;
-            this.count = count;
-            this.shape = shape;
-        }
-    }
+        boolean[][] visitedTable = new boolean[table.length][table.length];
+        boolean[][] visitedBoard = new boolean[game_board.length][game_board.length];
+        List<List<int[]>> boardList = new ArrayList<>();
+        List<List<int[]>> tableList = new ArrayList<>();
 
-    static public int solution(int[][] game_board, int[][] table) {
-        int nx, ny, nc;
-        int answer = 0;
-        int len = game_board.length;
-        int[] dx = {0, 1, 0, -1};
-        int[] dy = {1, 0, -1, 0};
+        for (int i = 0; i < table.length; i++){
+            for (int j = 0; j < table.length; j++){
 
-        List<Shape> tableList = new ArrayList<>();
-        List<Shape> boardList = new ArrayList<>();
-        Queue<int[]> q = new LinkedList<>();
+                if (table[i][j] == 1 && !visitedTable[i][j]){
+                    bfs(i, j, visitedTable, table, 1, tableList);
+                }
 
-        for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
-                if (table[i][j] == 1) {
-                    int[][] temp = new int[12][12];
-                    q.add(new int[]{i, j});
-                    table[i][j] = 0;
-                    nc = 1;
-                    temp[5][5] = 1;
-
-                    while (!q.isEmpty()) {
-                        int[] dot = q.poll();
-
-                        for (int k = 0; k < 4; k++) {
-                            nx = dot[1] + dx[k];
-                            ny = dot[0] + dy[k];
-
-                            if (nx < 0 || ny < 0 || nx >= len || ny >= len || table[ny][nx] == 0) {
-                                continue;
-                            }
-
-                            q.add(new int[]{nx, ny});
-                            temp[5 + dot[0] - ny][5 + dot[1] - nx] = 1;
-                            table[nx][ny] = 0;
-                            nc += 1;
-                        }
-                    }
-                    tableList.add(new Shape(false, nc, temp));
+                if (game_board[i][j] == 0 && !visitedBoard[i][j]){
+                    bfs(i, j, visitedBoard, game_board, 0, boardList);
                 }
             }
         }
 
-        for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
-                if (game_board[i][j] == 0) {
-                    int[][] temp = new int[12][12];
-                    q.add(new int[]{i, j});
-                    game_board[i][j] = 0;
-                    nc = 1;
-                    temp[5][5] = 1;
-
-                    while (!q.isEmpty()) {
-                        int[] dot = q.poll();
-
-                        for (int k = 0; k < 4; k++) {
-                            nx = dot[1] + dx[k];
-                            ny = dot[0] + dy[k];
-
-                            if (nx < 0 || ny < 0 || nx >= len || ny >= len
-                                || game_board[ny][nx] == 0) {
-                                continue;
-                            }
-
-                            q.add(new int[]{nx, ny});
-                            temp[5 + dot[0] - ny][5 + dot[1] - nx] = 1;
-                            table[nx][ny] = 0;
-                            nc += 1;
-                        }
-                    }
-                    boardList.add(new Shape(false, nc, temp));
-                }
-            }
-        }
-
-        while (!boardList.isEmpty()) {
-            Shape shape = boardList.get(0);
-            int temp = -1;
-
-            for (int i = 0; i < tableList.size(); i++) {
-                int[][] temp1 = shape.shape;
-                int[][] temp2 = tableList.get(i).shape;
-
-                if (checkSame(temp1, temp2, shape.count)) {
-                    answer += shape.count;
-                    boardList.remove(0);
-                    temp = i;
-                    break;
-                }
-            }
-
-            if (temp > -1) {
-                tableList.remove(temp);
-            }
-        }
+        answer = findBlock(boardList, tableList);
 
         return answer;
     }
 
-    static private boolean checkSame(int[][] board, int[][] table, int count) {
-        int temp = 0;
-        int len = board.length;
+    static private int findBlock(List<List<int[]>> board, List<List<int[]>> table){
+        int size = 0;
+        int tableLen = table.size();
+        int boardLen = board.size();
+        boolean[] visitedBoard = new boolean[boardLen];
+        for (int i = 0; i < tableLen; i++){
+            List<int[]> tablePoints = table.get(i);
+            for (int j = 0; j < boardLen; j++){
+                List<int[]> boardPoints = board.get(j);
 
-        for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
-                if (table[i][j] == 1 && board[i][j] == 1 && table[i][j] == board[i][j]) {
-                    temp += 1;
+                if (tablePoints.size() == boardPoints.size() && !visitedBoard[j]){ //좌표 개수 같을때
+                    if(isRotate(boardPoints, tablePoints)){ //회전해서 맞는지 확인
+                        size += tablePoints.size();
+                        visitedBoard[j] = true;
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        return size;
+    }
+
+    static private boolean isRotate(List<int[]> board, List<int[]> table){
+        boolean isCollect = false;
+
+        board.sort((o1, o2) -> {
+            return o1[0] > o2[0]?1 : o1[0] < o2[0]?-1 : Integer.compare(o1[1], o2[1]);
+        });
+
+        for (int i = 0; i < 4; i++){ //table퍼즐 0, 90, 180, 270도 회전
+
+            table.sort((o1, o2) -> {
+                return o1[0] > o2[0]?1 : o1[0] < o2[0]?-1 : Integer.compare(o1[1], o2[1]);
+            });
+            int nearZeroX = table.get(0)[0];
+            int nearZeroY = table.get(0)[1];
+
+            for (int j = 0; j < table.size(); j++){
+                table.get(j)[0] -= nearZeroX;
+                table.get(j)[1] -= nearZeroY;
+            }
+
+
+            boolean isCollectPoint = true;
+            for (int j = 0; j < board.size(); j++){ //좌표 비교
+                int[] boardPoint = board.get(j);
+                int[] tablePoint = table.get(j);
+
+                if (boardPoint[0] != tablePoint[0] || boardPoint[1] != tablePoint[1]){
+                    isCollectPoint = false;
+                    break;
+                }
+            }
+
+            if (isCollectPoint){
+                isCollect = true;
+                break;
+            } else{ //90도 회전 : x,y -> y, -x
+                for(int j = 0; j < table.size(); j++){
+                    int temp = table.get(j)[0];
+                    table.get(j)[0] = table.get(j)[1];
+                    table.get(j)[1] = -temp;
                 }
             }
         }
+        return isCollect;
 
-        if (temp == count) {
-            return true;
-        }
+    }
 
-        int[][] rotate = new int[len][len];
 
-        for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
-                rotate[len - i - 1][j] = table[i][j];
-            }
-        }
 
-        for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
-                int t = rotate[i][j];
-                rotate[i][j] = rotate[j][i];
-                rotate[j][i] = t;
-            }
-        }
+    static private void bfs(int currentX, int currentY, boolean[][] visited, int[][] graph,
+        int blockOrEmpty, List<List<int[]>> list){
 
-        temp = 0;
+        Queue<int[]> queue = new LinkedList<>();
+        visited[currentX][currentY] = true;
+        queue.add(new int[]{currentX, currentY});
+        List<int[]> subList = new ArrayList<>();
+        subList.add(new int[]{currentX-currentX, currentY-currentY});
 
-        for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
-                if (table[i][j] == 1 && rotate[i][j] == 1 && table[i][j] == rotate[i][j]) {
-                    temp += 1;
+        while (!queue.isEmpty()){
+            int[] pop = queue.remove();
+            int popX = pop[0];
+            int popY = pop[1];
+
+            for (int i = 0; i < 4; i++){
+                int nextX = popX + dx[i];
+                int nextY = popY + dy[i];
+                if (nextX < 0 || nextX >= graph.length || nextY < 0 || nextY >= graph.length){
+                    continue;
+                }
+                if (!visited[nextX][nextY] && graph[nextX][nextY] == blockOrEmpty){
+
+                    visited[nextX][nextY] = true;
+                    queue.add(new int[]{nextX, nextY});
+                    subList.add(new int[]{nextX-currentX, nextY-currentY});
                 }
             }
         }
-
-        return temp == count;
+        list.add(subList);
     }
 }
