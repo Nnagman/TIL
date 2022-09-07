@@ -15,50 +15,65 @@ public class 괄호변환 {
         }
     }
 
-    static private String solution(String p) {
-        String answer = "";
-
-        return answer;
+    static String solution(String p) {
+        return recursive(p);
     }
 
-    static private String recursive(String p) {
-        int vStart, pLen = p.length();
-        String temp;
+    static String recursive(String p) {
+        if (p.length() == 0) {
+            return "";
+        }
 
-        for (int i = pLen; i > 0; i--) {
-            temp = p.substring(0, i + 1);
+        int len = p.length();
+        String temp;
+        String u = "";
+        String v = "";
+
+        for (int i = 1; i < len + 1; i++) {
+            temp = p.substring(0, i);
             if (checkBalanced(temp)) {
-                if (checkRight(temp)) {
-                    if (i == pLen) {
-                        return temp;
-                    }
-                    return temp + recursive(p.substring(i));
-                }
-                vStart = i;
+                u = temp;
+                v = p.substring(i);
                 break;
             }
         }
 
-        temp = "(" + recursive(p.substring(vStart)) + ")";
+        if (checkRight(u)) {
+            u += recursive(v);
+            return u;
+        }
 
-        return temp;
+        temp = "(" + recursive(v) + ")";
+        u = u.substring(1, u.length() - 1);
+        u = reverse(u);
+
+        return temp + u;
     }
 
-    static private Boolean checkRight(String p) {
+    static String reverse(String p) {
+        char[] arr = p.toCharArray();
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = arr[i] == '(' ? ')' : '(';
+        }
+        return String.valueOf(arr);
+    }
+
+    static boolean checkRight(String p) {
         Stack<Character> stack = new Stack<>();
         for (char c : p.toCharArray()) {
-            if (stack.isEmpty()) {
-                stack.add(c);
+            if (c == '(') {
+                stack.push('(');
             } else {
-                if (c != stack.peek()) {
-                    stack.pop();
+                if (stack.isEmpty() || stack.peek() == ')') {
+                    return false;
                 }
+                stack.pop();
             }
         }
-        return stack.isEmpty();
+        return true;
     }
 
-    static private Boolean checkBalanced(String p) {
+    static boolean checkBalanced(String p) {
         int cnt = 0;
         for (char c : p.toCharArray()) {
             if (c == '(') {
