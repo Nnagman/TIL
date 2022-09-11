@@ -6,15 +6,16 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
+import java.util.Map.Entry;
 
 public class 주차요금계산 {
 
     public static void main(String[] args) {
-        int[][] fees = {{120, 0, 60, 591}};
+        int[][] fees = {{180, 5000, 10, 600}};
 
         String[][] records = {
-            {"16:00 0010 IN", "23:00 0100 IN"}};
+            {"05:34 5961 IN", "06:00 0000 IN", "06:34 0000 OUT", "07:59 5961 OUT", "07:59 0148 IN",
+                "18:59 0000 IN", "19:09 0148 OUT", "22:59 5961 IN", "23:00 5961 OUT"}};
 
         for (int i = 0; i < fees.length; i++) {
             System.out.println(Arrays.toString(solution(fees[i], records[i])));
@@ -22,66 +23,52 @@ public class 주차요금계산 {
     }
 
     static public int[] solution(int[] fees, String[] records) {
-        Map<String, Integer> hs = new HashMap<>();
-        boolean[] visited = new boolean[records.length];
-        String[] temp, in, out;
-        Stack<String> stack;
-        String carNum;
-        int hour, minute;
+        Map<String, String> recordMap = new HashMap<>();
+        Map<String, Integer> feeMap = new HashMap<>();
 
-        for (int i = 0; i < records.length; i++) {
-            if (!visited[i]) {
-                temp = records[i].split(" ");
-                carNum = temp[1];
-                stack = new Stack<>();
-                hs.put(carNum, 0);
-                visited[i] = true;
+        for (String r : records) {
+            feeMap.put(r.split(" ")[1], 0);
+        }
 
-                for (int j = i; j < records.length; j++) {
-                    temp = records[j].split(" ");
-                    if (temp[1].equals(carNum)) {
-                        visited[j] = true;
-                        if (temp[2].equals("IN")) {
-                            stack.push(temp[0]);
-                        } else {
-                            in = stack.pop().split(":");
-                            out = temp[0].split(":");
-                            hour = (Integer.parseInt(out[0]) - Integer.parseInt(in[0])) * 60;
-                            minute = Integer.parseInt(out[1]) - Integer.parseInt(in[1]);
-                            hs.put(carNum, hs.get(carNum) + hour + minute);
-                        }
-                    }
-                }
+        for (String r : records) {
+            String carNum = r.split(" ")[1];
+            String time = r.split(" ")[0];
 
-                if (!stack.isEmpty()) {
-                    in = stack.pop().split(":");
-                    out = "23:59".split(":");
-                    hour = (Integer.parseInt(out[0]) - Integer.parseInt(in[0])) * 60;
-                    minute = Integer.parseInt(out[1]) - Integer.parseInt(in[1]);
-                    hs.put(carNum, hs.get(carNum) + hour + minute);
-                }
+            if (!recordMap.containsKey(carNum)) {
+                recordMap.put(carNum, time);
+            } else {
+                String[] in = recordMap.remove(carNum).split(":");
+                String[] out = time.split(":");
+
+                int hour = Integer.parseInt(out[0]) - Integer.parseInt(in[0]);
+                int minute = Integer.parseInt(out[1]) - Integer.parseInt(in[1]);
+
+                feeMap.put(carNum, feeMap.get(carNum) + 60 * hour + minute);
             }
         }
 
-        List<String> cars = new ArrayList<>(hs.keySet());
+        for (Entry<String, String> entry : recordMap.entrySet()) {
+            String[] in = entry.getValue().split(":");
+
+            int hour = 23 - Integer.parseInt(in[0]);
+            int minute = 59 - Integer.parseInt(in[1]);
+
+            feeMap.put(entry.getKey(), feeMap.get(entry.getKey()) + 60 * hour + minute);
+        }
+
+        List<String> cars = new ArrayList<>(feeMap.keySet());
         cars.sort(Comparator.comparingInt(Integer::parseInt));
+        int[] answer = new int[cars.size()];
 
-        List<Integer> ans = new ArrayList<>();
-        int fee;
+        for (int i = 0; i < answer.length; i++) {
+            int time = feeMap.get(cars.get(i));
+            answer[i] = fees[1];
 
-        for (String num : cars) {
-            minute = hs.get(num);
-            fee = fees[1];
-            if (minute > fees[0]) {
-                if (minute % fees[2] != 0) {
-                    minute -= minute % fees[2];
-                    minute += fees[2];
-                }
-                fee += fees[3] * ((minute - fees[0]) / fees[2]);
+            if (time > fees[0]) {
+                answer[i] += Math.ceil((time - fees[0]) / (double) fees[2]) * fees[3];
             }
-            ans.add(fee);
         }
 
-        return ans.stream().mapToInt(Integer::intValue).toArray();
+        return answer;
     }
 }
