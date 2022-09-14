@@ -1,15 +1,17 @@
 package kakao;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class 수식최대화 {
 
     public static void main(String[] args) {
-        System.out.println(solution("50*6-3*2"));
+        System.out.println(solution("200-300-500-600*40+500+500"));
     }
 
-    static String[] arr = {"+", "-", "*"};
+    static String[] arr = {"*", "+", "-"};
 
     static long solution(String expression) {
         long answer = 0;
@@ -23,7 +25,11 @@ public class 수식최대화 {
                     if (i == k || j == k) {
                         continue;
                     }
-                    answer = Math.max(answer, getResult(expression, i, j, k));
+                    HashMap<String, Integer> hs = new HashMap<>();
+                    hs.put(arr[i], 0);
+                    hs.put(arr[j], 1);
+                    hs.put(arr[k], 2);
+                    answer = Math.max(answer, getResult(expression, hs));
                 }
             }
         }
@@ -31,22 +37,48 @@ public class 수식최대화 {
         return answer;
     }
 
-    static long getResult(String expression, int a, int b, int c) {
+    static long getResult(String expression, HashMap<String, Integer> hs) {
         Queue<String> queue = new LinkedList<>();
+        Stack<String> stack = new Stack<>();
         String temp = "";
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < expression.length(); j++) {
-                if (expression.charAt(j) == '+' || expression.charAt(j) == '*'
-                    || expression.charAt(j) == '-') {
-                    queue.add(temp);
-                    queue.add(String.valueOf(expression.charAt(j)));
-                    temp = "";
-                } else {
-                    temp += expression.charAt(j);
-                }
-            }
 
+        for (char c : expression.toCharArray()) {
+            if (Character.isDigit(c)) {
+                temp += c;
+            } else {
+                queue.add(temp);
+                temp = "";
+                while (!stack.isEmpty()
+                    && hs.get(String.valueOf(c)) >= hs.get(stack.peek())) {
+                    queue.add(stack.pop());
+                }
+                stack.push(String.valueOf(c));
+            }
         }
-        return 0;
+
+        queue.add(temp);
+
+        while (!stack.isEmpty()) {
+            queue.add(stack.pop());
+        }
+
+        Stack<Long> stack2 = new Stack<>();
+        while (!queue.isEmpty()) {
+            temp = queue.poll();
+            if (temp.equals("+") || temp.equals("-") || temp.equals("*")) {
+                long n1 = stack2.pop();
+                long n2 = stack2.pop();
+                if (temp.equals("+")) {
+                    stack2.push(n2 + n1);
+                } else if (temp.equals("-")) {
+                    stack2.push(n2 - n1);
+                } else {
+                    stack2.push(n2 * n1);
+                }
+                continue;
+            }
+            stack2.push(Long.parseLong(temp));
+        }
+        return Math.abs(stack2.pop());
     }
 }
