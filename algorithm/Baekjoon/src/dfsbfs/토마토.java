@@ -1,4 +1,4 @@
-package DFSBFS;
+package dfsbfs;
 
 import java.io.BufferedReader;
 import java.io.IOException;
