@@ -4,3 +4,4 @@
 
 [JpaRepository? No, Repository? Yes!](https://velog.io/@ohzzi/JpaRepository-No-Repository-Yes)
 - 다른 프로젝트의 코드를 보다가 Repository가 JpaRepository가 아닌 CrudRepository로 되어있어서 궁금해서 찾아보다 발견.
+- https://github.com/f-lab-edu/JBLY 어쩌다 찾게되었는데, 좋은듯.
