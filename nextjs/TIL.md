@@ -43,3 +43,6 @@
 
 [Sharing fetch requests between Server Components](https://nextjs.org/docs/getting-started/react-essentials#sharing-fetch-requests-between-server-components)
 - fetch 요청은 같은 컴포넌트 트리에 있으면 중복제거 될 수 있다.
+
+# Routing
+
