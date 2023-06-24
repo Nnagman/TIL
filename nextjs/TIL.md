@@ -46,3 +46,5 @@
 
 # Routing
 
+[Server-Centric Routing with Client-side Navigation](https://nextjs.org/docs/app/building-your-application/routing#server-centric-routing-with-client-side-navigation)
+- SPA(Single-Page Application)과 같이 유저가 새로운 라우트로 이동할 때, 페이지 전체를 새로고침 하는것이 아니라 URL만 바뀌고 필요한 세그먼트만 바뀐다.
