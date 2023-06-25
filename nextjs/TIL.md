@@ -1,4 +1,4 @@
-![image](https://github.com/Nnagman/TIL/assets/16336810/b46ea0d0-babb-471d-9770-98d53a68b4f8)# React Essentials
+# React Essentials
 ### Server Components
 [File Conventions](https://nextjs.org/docs/app/building-your-application/routing#file-conventions)
 - Next.js에서 제공하는 special files는 다음과 같다.
@@ -64,7 +64,7 @@
 - prefetch는 production에서만 작동하고 link에 prefetch={false}로 비활성화가 가능하다.
 
 ### Dynamic Routes
-[TypeScript](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#typescript)
+[TypeScript](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#typescript)<br/>
 ![image](https://github.com/Nnagman/TIL/assets/16336810/45dd086a-d0bb-4c6d-823a-d7009de52273)
 
 ### Loading UI and Streaming
@@ -74,7 +74,7 @@
 ### [Error Handling](https://nextjs.org/docs/app/building-your-application/routing/error-handling)
 
 ### Parallel Routes
-[Convention](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#convention)
+[Convention](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#convention)<br/>
 ![image](https://github.com/Nnagman/TIL/assets/16336810/5361bea7-9c8c-462a-9a8f-9527f05d424c)
 
 [Unmatched Routes](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#unmatched-routes)
@@ -84,7 +84,7 @@
 - 예를 들어 Modal같은 경우 사용하는 경우에만 render하기 위해 null을 return하는 defualt.js를 만들어 줄 수 있다.
 
 ### Intercepting Routes
-[Convention](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes#convention)
+[Convention](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes#convention)<br/>
 ![image](https://github.com/Nnagman/TIL/assets/16336810/da6171d3-09a2-41a6-9c6d-8d793ee529e9)
 - [예시](https://github.com/vercel-labs/nextgram/tree/main/src/app)
 
