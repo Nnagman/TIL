@@ -1,19 +1,18 @@
 # React Essentials
-
-## Server Components
+### Server Components
 [File Conventions](https://nextjs.org/docs/app/building-your-application/routing#file-conventions)
 - Next.js에서 제공하는 special files는 다음과 같다.
 - layout, page, loading, not-found, error, global-error, route, template, default
 
 - [Component Hierarchy](https://nextjs.org/docs/app/building-your-application/routing#file-conventions)에 맞게 코드를 작성하면 자동으로 adopting한다.
 
-## Client Components
+### Client Components
 [Client Components](https://nextjs.org/docs/getting-started/react-essentials#client-components)
 - React의 [hydarate](https://react.dev/reference/react-dom/client/hydrateRoot)로 Next.js에선 pre-rendered를 할 수 있다.
 - 파일의 최상단에 'use client' 지시어(directive)를 사용하여 해당 코드는 Client Components임을 알릴 수 있다.
 - 'use client'는 모든 파일에 명시할 필요는 없다. 클라이언트 모듈들의 최초 진입점(entry point)에 명시하면 된다.
 
-## Patterns
+### Patterns
 [Moving Client Components to the Leaves](https://nextjs.org/docs/getting-started/react-essentials#moving-client-components-to-the-leaves)
 - 어플리케이션의 성능을 위해서 클라이언트 컴포넌트는 가능하면 컴포넌트 트리의 마지막에 위치해야 한다.
 - 레이아웃의 전체를 클라이언트 컴포넌트로 만들기 보단 상호작용 하는 로직들만 클라이언트 컴포터넌트로 만들어 따로 import하고 레이아웃은 서버 컴포넌트로 둔다. ( 이러면 레이아웃 안 컴포넌트들의 자바스크립트를 전부 클라이언트로 보낼 필요가 없어진다 )
@@ -34,9 +33,9 @@
 [Third-party packages](https://nextjs.org/docs/getting-started/react-essentials#third-party-packages)
 - 써드파티 패키지는 'use client' 지시어를 사용하지 않는 경우가 있다. 그러므로 서버컴포넌트에서 사용하려면 'use client' 지시어로 감싼 다음 import해야한다.
 
-## Context
+### Context
 [Using context in Client Components](https://nextjs.org/docs/getting-started/react-essentials#using-context-in-client-components)
-- 써드파티 패키지와 같이 Context는 클라리언트 컴포넌트에서만 사용 가능하다.
+- 써드파티 패키지와 같이 Context는 클라이언트 컴포넌트에서만 사용 가능하다.
 
 [Sharing data between Server Components](https://nextjs.org/docs/getting-started/react-essentials#rendering-third-party-context-providers-in-server-components)
 - '@utils/database'와 같이 모듈을 import하는 이러한 자바스크립트 패턴은 싱글톤을 보장한다.
@@ -48,3 +47,10 @@
 
 [Server-Centric Routing with Client-side Navigation](https://nextjs.org/docs/app/building-your-application/routing#server-centric-routing-with-client-side-navigation)
 - SPA(Single-Page Application)과 같이 유저가 새로운 라우트로 이동할 때, 페이지 전체를 새로고침 하는것이 아니라 URL만 바뀌고 필요한 세그먼트만 바뀐다.
+- 라우터는 리액트 서버 컴포넌트 페이로드를 클라이언트측 인메모리 캐시에 저장 할 것이다. 이를 통해 fetch된 segment를 재사용 할 수 있다.
+
+[Partial Rendering](https://nextjs.org/docs/app/building-your-application/routing#partial-rendering)
+- sibling routes간 이동시 레이아웃과 페이지에서 변경된 부분만 fetch 그리고 render를 할 것이다.
+
+### pages-and-layouts
+[Templates](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#templates)
