@@ -58,4 +58,7 @@
 - 특별한 경우가 아니면 layout을 사용하는걸 추천한다.
 
 ### Linking and Navigating
-[<Link> Component]
+[Prefetching](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#prefetching)
+- 그 전 페이지 그리고 prefetch한 payload를 클라이언트 메모리에 캐싱한다 ( 서버 io를 줄여줌 )
+- 라우트가 static이라면 전부 prefetch하겠지만, dynamic이라면 첫번째 공유 layout과 loading.js만 prefetch해주고 instant loading states로 suspense component의 fallback으로 등록된 Loading 화면을 불러 올 수 있게 해준다
+- prefetch는 production에서만 작동하고 link에 prefetch={false}로 비활성화가 가능하다.
