@@ -54,3 +54,8 @@
 
 ### pages-and-layouts
 [Templates](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#templates)
+- Template는 layout와 같이 자식 layout과 page들을 감싼다. 하지만 template는 다른 자식들로 이동시 인스턴스가 새롭게 만들어진다.
+- 특별한 경우가 아니면 layout을 사용하는걸 추천한다.
+
+### Linking and Navigating
+[<Link> Component]
