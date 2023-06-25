@@ -62,3 +62,12 @@
 - 그 전 페이지 그리고 prefetch한 payload를 클라이언트 메모리에 캐싱한다 ( 서버 io를 줄여줌 )
 - 라우트가 static이라면 전부 prefetch하겠지만, dynamic이라면 첫번째 공유 layout과 loading.js만 prefetch해주고 instant loading states로 suspense component의 fallback으로 등록된 Loading 화면을 불러 올 수 있게 해준다
 - prefetch는 production에서만 작동하고 link에 prefetch={false}로 비활성화가 가능하다.
+
+### Dynamic Routes
+[TypeScript](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#typescript)
+![image](https://github.com/Nnagman/TIL/assets/16336810/45dd086a-d0bb-4c6d-823a-d7009de52273)
+
+### Loading UI and Streaming
+
+[Loading UI and Streaming](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#streaming-with-suspense)
+- Streaming Server Rendering과 Selective Hydration로 TTFB, FCB를 줄이고 TTI를 향상시켜준다.
