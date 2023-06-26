@@ -103,4 +103,5 @@
 ### [Project Organization and File Colocation](https://nextjs.org/docs/app/building-your-application/routing/colocation)
 - 프로젝트 폴더 구조에 대해서 설명함.
 
-### Internationalization
+### [Internationalization](https://nextjs.org/docs/app/building-your-application/routing/internationalization)
+- 국제화에 대해 설명함
