@@ -89,3 +89,18 @@
 - [예시](https://github.com/vercel-labs/nextgram/tree/main/src/app)
 
 ### Route Handlers
+[Route Resolution](https://nextjs.org/docs/app/building-your-application/routing/router-handlers#route-resolution)
+<br/>
+![image](https://github.com/Nnagman/TIL/assets/16336810/f2fb6c21-279c-4125-8ad6-b6e96e3fce46)
+- page.js와 route.js를 같은 경로에 두면 안된다. Each route.js or page.js file takes over all HTTP verbs for that route.
+
+[Revalidating Static Data](https://nextjs.org/docs/app/building-your-application/routing/router-handlers#revalidating-static-data)
+- static 요청의 경우 cache 유효 기간을 설정 할 수 있다.
+
+### [Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware)
+- Nextjs 미들웨어는 특정 요청에 대해 설정한 내용대로 응답을 하게 해준다.
+
+### [Project Organization and File Colocation](https://nextjs.org/docs/app/building-your-application/routing/colocation)
+- 프로젝트 폴더 구조에 대해서 설명함.
+
+### Internationalization
