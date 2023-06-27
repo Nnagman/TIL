@@ -105,3 +105,16 @@
 
 ### [Internationalization](https://nextjs.org/docs/app/building-your-application/routing/internationalization)
 - 국제화에 대해 설명함
+
+### [Static and Dynamic Rendering](https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic-rendering)
+- Static Rendering은 build time에 rendering하고 caching 된다. ( default )
+- Dynamic Rendering은 request time에 rendering한다.
+
+### [Data Fetching](https://nextjs.org/docs/app/building-your-application/data-fetching)
+- WIP ( 아직 사용을 할 필요가 없음 )
+
+### [Styling](https://nextjs.org/docs/app/building-your-application/styling)
+
+### [Image Optimization](https://nextjs.org/docs/app/building-your-application/optimizing/images)
+- local에서 가져오는 image는 자동으로 알맞은 width height 값을 주는데, remote는 그런거 없으니 직접하자.
+- next.config.js에서 remote관련 설정을 할 수 있다.
