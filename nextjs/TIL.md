@@ -106,6 +106,8 @@
 ### [Internationalization](https://nextjs.org/docs/app/building-your-application/routing/internationalization)
 - 국제화에 대해 설명함
 
+# Data Fetching
+
 ### [Static and Dynamic Rendering](https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic-rendering)
 - Static Rendering은 build time에 rendering하고 caching 된다. ( default )
 - Dynamic Rendering은 request time에 rendering한다.
@@ -113,8 +115,25 @@
 ### [Data Fetching](https://nextjs.org/docs/app/building-your-application/data-fetching)
 - WIP ( 아직 사용을 할 필요가 없음 )
 
+# Styling
+
 ### [Styling](https://nextjs.org/docs/app/building-your-application/styling)
+
+# Optimizing
 
 ### [Image Optimization](https://nextjs.org/docs/app/building-your-application/optimizing/images)
 - local에서 가져오는 image는 자동으로 알맞은 width height 값을 주는데, remote는 그런거 없으니 직접하자.
 - next.config.js에서 remote관련 설정을 할 수 있다.
+
+### [Script Optimization](https://nextjs.org/docs/app/building-your-application/optimizing/scripts)
+- third-pary script를 가져다 쓸 수 있는데, next/script module을 써야한다.
+- script를 가져다 오는 전략들이 있는데, afterInteractive가 default임.
+
+### [Metadata](https://nextjs.org/docs/app/building-your-application/optimizing/metadata)
+- static metadata는 layout이나 page에서 export const metadata: Metadata로 한다.
+- dynamic metadata는 외부에 data를 fetch받아 쓴다. ( client에게 head tags를 먼저 보내려고 dynamic metadata인 generateMetadata가 완성되길 기다린다. )
+- metadata는 merging 된다.
+
+### [Lazy Loading](https://nextjs.org/docs/app/building-your-application/optimizing/lazy-loading)
+- client components에서 server components를 lazyloading 할 수 있다. 또 한, ssr설정도 가능. 방법은 두가지 next/dynamic 그리고 suspense.
+- 외부 library를 import할 수 있다.
